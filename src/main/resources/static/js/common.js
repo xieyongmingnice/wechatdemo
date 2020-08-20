@@ -1,0 +1,1 @@
+var serverAddr='http://19m35402q5.51mypc.cn/wechatdemo';
