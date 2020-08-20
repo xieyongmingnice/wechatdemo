@@ -3,6 +3,7 @@ package com.blue.wechatdemo.util;
 import com.blue.wechatdemo.util.model.WeChatSignature;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,7 +28,8 @@ public class WeChatUtil {
     // accessToken 可用时长7200s 之后失效
     private Long expire = 60*60*2L;
 
-    private static final RedisUtil redisUtil = RedisUtil.getInstance();
+    @Autowired
+    private RedisUtil redisUtil;
 
     public String getAccessToken(){
         String accessToken = redisUtil.getStr("accessToken");

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>H5跳转小程序DEMO</title>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/common.js"></script>
+</head>
+
+<body>
+    <input type="button" value="生成配置" onclick="genConfig()">
+    <br>
+    <br>
+    <br>
+    <br>
+    <div style="height: 100px;width: 200px">
+        <wx-open-launch-weapp
+                id="launch-btn"
+                username="gh_d4474c1ffa5e"
+                path="pages/home/guidanceList/guidanceList.html"
+        >
+
+            <template>
+                <style>.btn { padding: 12px }</style>
+                <button class="btn" style="width: 160px;height: 80px">打开小程序</button>
+            </template>
+        </wx-open-launch-weapp>
+    </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    })
+
+    function genConfig() {
+        $.ajax({
+            url:serverAddr+'/wechat/signature',
+            data:{
+              url:'http://19m35402q5.51mypc.cn/wechatdemo/index.html'
+            },
+            success:function (returnData) {
+                console.log(returnData);
+                wx.config({
+                    debug: true,
+                    // 公众号唯一标识
+                    appId: returnData.appId,
+                    // 服务端生成的时间戳
+                    timestamp: returnData.timestamp,
+                    // 服务端生成的随机字符串
+                    nonceStr: returnData.nonceStr,
+                    // 服务端生成的签名
+                    signature: returnData.signature,
+                    // 配置开放js标签列表 随便开通一个
+                    jsApiList: ['onMenuShareAppMessage'],
+                    // 配置开放标签列表 开通跳转小程序标签
+                    openTagList: ['wx-open-launch-weapp'],
+                });
+                console.log("执行到config之后了");
+                wx.ready(function () {
+                    console.log("wx.config处理成功");
+                    var btn = document.getElementById('launch-btn');
+                    btn.addEventListener('launch', function (e) {
+                        console.log('success');
+                    });
+                    btn.addEventListener('error', function (e) {
+                        console.log('fail', e.detail);
+                    });
+                });
+                wx.error(function () {
+                    console.log("wx.config处理失败")
+                })
+            }
+        })
+    }
+</script>
+</body>
+</html>
