@@ -23,10 +23,9 @@ public class WeChatUtil {
     private static final String WE_CHAT_GET_JS_TICKET_URL =
             "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi";
 
-    private static String accessToken = null;
-    private static String ticket = null;
+
     // accessToken 可用时长7200s 之后失效
-    private Long expire = 60*60*2L;
+    private static final Long expire = 60*60*2L;
 
     @Autowired
     private RedisUtil redisUtil;
@@ -93,10 +92,5 @@ public class WeChatUtil {
         return signatureModel;
 
     }
-
-
-
-
-
 
 }

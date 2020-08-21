@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <input type="button" value="生成配置" onclick="genConfig()">
+    <input style="height: 70px;width: 140px" type="button" value="生成配置,只需要生成一次" onclick="genConfig()">
     <br>
     <br>
     <br>
@@ -18,12 +18,12 @@
         <wx-open-launch-weapp
                 id="launch-btn"
                 username="gh_d4474c1ffa5e"
-                path="pages/home/guidanceList/guidanceList.html"
+                path="pages/home/guidanceList/guidanceList.html?"
         >
 
             <template>
                 <style>.btn { padding: 12px }</style>
-                <button class="btn" style="width: 160px;height: 80px">打开小程序</button>
+                <button class="btn" style="width: 160px;height: 80px" onclick="sendPresInfo()">打开小程序</button>
             </template>
         </wx-open-launch-weapp>
     </div>
@@ -34,10 +34,19 @@
 
     })
 
+    // 发送处方信息到普华接口
+    function sendPresInfo() {
+        $.ajax({
+            url:serverAddr+'/guidance/sendPresData'
+        })
+    }
+
+
     function genConfig() {
         $.ajax({
             url:serverAddr+'/wechat/signature',
             data:{
+              // 当前页面url
               url:'http://19m35402q5.51mypc.cn/wechatdemo/index.html'
             },
             success:function (returnData) {

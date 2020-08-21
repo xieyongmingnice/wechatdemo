@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * rest
+ * 生成微信jssdk签名的demo
  */
 @RestController
 @RequestMapping("wechat")

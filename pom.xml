@@ -41,6 +41,7 @@
 			<version>3.10</version>
 		</dependency>
 
+		<!-- apache加密 -->
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
