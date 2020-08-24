@@ -1,6 +1,5 @@
 package com.blue.wechatdemo;
 
-import com.blue.wechatdemo.model.resp.SingleDataResult;
 import com.blue.wechatdemo.util.AESUtil;
 import com.blue.wechatdemo.util.RSAEncryptionDemo;
 import org.junit.jupiter.api.Test;
@@ -8,9 +7,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 public class SaveDataTest {
@@ -62,7 +58,7 @@ public class SaveDataTest {
         String encryptedData = RSAEncryptionDemo.encipher(dataStr);
         // 组织http请求
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://192.168.1.66:50080/DrugSafeForWeChat/thirdHospital/saveData";
+        String url = "http://wechattest.drugsafe.cn:50080/DrugSafeForWeChat/thirdHospital/saveData";
 
         // 请求添加header
         HttpHeaders headers = new HttpHeaders();
@@ -81,21 +77,17 @@ public class SaveDataTest {
 
     // 调用生成指导单接口
     // 从H5跳转到小程序 如果跳转链接中带有patientId及hospitalCode参数，则会自动请求该接口为用户生成指导单。
+    // 华润方面不需要使用该接口
     @Test
     public void genGuidance(){
         // 组织http请求
         RestTemplate restTemplate = new RestTemplate();
         // 接口地址
-        String url = "http://192.168.1.66:8080/DrugSafeForWeChat/mp/prescriptionForward/generateGuidance?" +
+        String url = "http://wechattest.drugsafe.cn:50080/DrugSafeForWeChat/mp/prescriptionForward/generateGuidance?" +
                 "userBaseId={userBaseId}&patientRegisterCode={patientRegisterCode}&hospitalCode={hospitalCode}";
-        // header AccessKey 的内容也为加密串
-        MultiValueMap<String,String> map = new LinkedMultiValueMap<>();
-        map.add("userBaseId","fc4f88bd-3d99-4dd1-9f0b-2836732824a2");
-        map.add("patientRegisterCode","M081201");
-        map.add("hospitalCode","FnAg/4kkGataidJySwSRLg==");
 
         ResponseEntity<String> response = restTemplate.postForEntity(url, null,String.class,
-                "fc4f88bd-3d99-4dd1-9f0b-2836732824a2","M081201","FnAg/4kkGataidJySwSRLg==");
+                "fc4f88bd-3d99-4dd1-9f0b-2836732824a2","X082402","TOy9m28brLRDnSqZd/MDIw==");
 
         // 获取返回 code返回200 msg返回操作成功 表明数据存储成功
         System.out.println(response.getBody());

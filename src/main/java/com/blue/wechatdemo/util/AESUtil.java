@@ -12,15 +12,16 @@ import java.security.SecureRandom;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 public class AESUtil {
     private static final String KEY_ALGORITHM = "AES";
     private static final String DEFAULT_CIPHER_ALGORITHM = "AES/ECB/PKCS5Padding";//默认的加密算法
     /**
-     * 友谊医院DMZ区权限加密密码
+     * 权限加密密码
      */
     public static  final String DMZ_PHHC_FRIENDSHIP_KEY="DMZ_PHHC_FRIENDSHIP";
     /**
-     * 友谊医院用药指导权限加密密码
+     * 用药指导权限加密密码
      */
     public static final String FRIENDSHIP_YYZD_KEY="FRIENDSHIP_YYZD";
     /**
